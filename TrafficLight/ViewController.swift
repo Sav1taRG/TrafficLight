@@ -8,11 +8,19 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    enum Colors {
+        case red
+        case yellow
+        case green
+    }
+    
+    var currentColour:Colors = .red
     
     @IBOutlet var redLight: UIView!
     @IBOutlet var yellowLight: UIView!
     @IBOutlet var greenLight: UIView!
+    
     @IBOutlet var lightSwitchButton: UIButton!
     
     override func viewDidLoad() {
@@ -29,10 +37,27 @@ class ViewController: UIViewController {
         
         lightSwitchButton.layer.cornerRadius = 20
     }
-
-//    private func lightSwitchButtonDidTapped() {
-//        lightSwitchButton.setTitle(<#T##title: String?##String?#>, for: <#T##UIControl.State#>)
-//    }
-
+    
+    
+    @IBAction func lightSwitchButtonDidTapped() {
+        if lightSwitchButton.currentTitle == "Start" {
+            lightSwitchButton.setTitle("Next", for: .normal)
+            redLight.alpha = 1
+        }
+        
+        switch currentColour {
+        case .red:
+            redLight.alpha = 0.3
+            yellowLight.alpha = 1
+            currentColour = .yellow
+        case .yellow:
+            yellowLight.alpha = 0.3
+            greenLight.alpha = 1
+            currentColour = .green
+        case .green:
+            greenLight.alpha = 0.3
+            redLight.alpha = 1
+            currentColour = .red
+        }
+    }
 }
-
