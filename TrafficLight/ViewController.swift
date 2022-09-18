@@ -43,6 +43,7 @@ class ViewController: UIViewController {
         if lightSwitchButton.currentTitle == "Start" {
             lightSwitchButton.setTitle("Next", for: .normal)
             redLight.alpha = 1
+            return
         }
         
         switch currentColour {
