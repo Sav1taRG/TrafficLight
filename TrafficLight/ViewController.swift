@@ -45,7 +45,6 @@ class ViewController: UIViewController {
             redLight.alpha = 1
             return
         }
-        
         switch currentColour {
         case .red:
             redLight.alpha = 0.3
