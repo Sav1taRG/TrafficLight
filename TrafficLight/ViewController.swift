@@ -9,35 +9,36 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    enum Colors {
-        case red
-        case yellow
-        case green
-    }
-    
-    var currentColour:Colors = .red
-    
     @IBOutlet var redLight: UIView!
     @IBOutlet var yellowLight: UIView!
     @IBOutlet var greenLight: UIView!
     
     @IBOutlet var lightSwitchButton: UIButton!
     
+    private var currentColor:Colors = .red
+    
+    let lightIsOn = 1
+    let lightIsOff = 0.3
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         redLight.layer.cornerRadius = redLight.frame.width / 2
-        redLight.alpha = 0.3
-        
         yellowLight.layer.cornerRadius = yellowLight.frame.width / 2
-        yellowLight.alpha = 0.3
-        
         greenLight.layer.cornerRadius = greenLight.frame.width / 2
-        greenLight.alpha = 0.3
+        
+        redLight.alpha = lightIsOff
+        yellowLight.alpha = lightIsOff
+        greenLight.alpha = lightIsOff
         
         lightSwitchButton.layer.cornerRadius = 20
     }
     
+    override func viewWillLayoutSubviews() {
+        redLight.layer.cornerRadius = redLight.frame.width / 2
+        yellowLight.layer.cornerRadius = yellowLight.frame.width / 2
+        greenLight.layer.cornerRadius = greenLight.frame.width / 2
+    }
     
     @IBAction func lightSwitchButtonDidTapped() {
         if lightSwitchButton.currentTitle == "Start" {
@@ -45,19 +46,26 @@ class ViewController: UIViewController {
             redLight.alpha = 1
             return
         }
-        switch currentColour {
+   
+        switch currentColor {
         case .red:
-            redLight.alpha = 0.3
+            redLight.alpha = lightIsOff
             yellowLight.alpha = 1
-            currentColour = .yellow
+            currentColor = .yellow
         case .yellow:
-            yellowLight.alpha = 0.3
+            yellowLight.alpha = lightIsOff
             greenLight.alpha = 1
-            currentColour = .green
+            currentColor = .green
         case .green:
-            greenLight.alpha = 0.3
+            greenLight.alpha = lightIsOff
             redLight.alpha = 1
-            currentColour = .red
+            currentColor = .red
         }
     }
+}
+
+enum Colors {
+    case red
+    case yellow
+    case green
 }
